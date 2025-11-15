@@ -29,15 +29,15 @@ public class LoanCalc {
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	private static double endBalance(double loan, double rate, int n, double payment) {	
 		// Replace the following statement with your code
-		double result=0;
-		for(int i=0; i<n; i++){
-			result = (loan-payment)*(1+rate);
-			loan=result;
-		}
-
-		return Math.ceil(result);
+		double periodRateFactor = 1.0 + (rate / 100.0); 
+        double currentBalance = loan;
+        for (int i = 0; i < n; i++) {
+            currentBalance = currentBalance - payment;
+            currentBalance = currentBalance * periodRateFactor;
+        }
+        return currentBalance;
 	}
-	
+
 	// Uses sequential search to compute an approximation of the periodical payment
 	// that will bring the ending balance of a loan close to 0.
 	// Given: the sum of the loan, the periodical interest rate (as a percentage),
@@ -45,15 +45,22 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
 		// Replace the following statement with your code
-		double g = loan/n;
-		double result = 1;
-		iterationCounter =0;
-		while (result > 0) {
-			result = endBalance(loan, rate, n, g);
-			 g+=epsilon;
-			 iterationCounter++;
-		}
-		return g;
+		double g = loan / n;
+        double result = endBalance(loan, rate, n, g);
+        iterationCounter = 0;
+        while (result > 0) {
+             g += 1.0; 
+             result = endBalance(loan, rate, n, g);
+             iterationCounter++; 
+        }
+        g -= 1.0; 
+        result = endBalance(loan, rate, n, g);
+        while (result > 0) {
+            g += epsilon;
+            result = endBalance(loan, rate, n, g);
+            iterationCounter++; 
+        }
+        return g; 
     }
     
     // Uses bisection search to compute an approximation of the periodical payment 
@@ -63,16 +70,22 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
         // Replace the following statement with your code
-		double l = loan/n;
-		double h = (1+rate*n)*l;
-		double g = (l+h)/2;
-		iterationCounter =0;
-		while (h-l > epsilon) {
-			if(endBalance(loan, rate, n, g)*endBalance(loan, rate, n,l)>0) l = g;
-			else h = g;
-			g = (l+h)/2;
-			iterationCounter++;
-		}
-		return g;
+        double l = loan / n;
+        double h = loan; 
+        double g = (l + h) / 2.0;
+        iterationCounter = 0;
+        while (h - l > epsilon) {
+            iterationCounter++; 
+            double balanceG = endBalance(loan, rate, n, g);
+            if (balanceG > 0) {
+                l = g; 
+            } 
+            else {
+                h = g; 
+            }
+            g = (l + h) / 2.0;
+        }
+        return g; 
     }
 }
+  
