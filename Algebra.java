@@ -67,16 +67,15 @@ public class Algebra {
 			for(int i=0; i<x2; i++){
 			    sum = plus(sum, x1);
 		    }
-			sum = minus(0, sum);
 		}
-		if (x1 >0 && x2 < 0){
+		else if (x1 >0 && x2 < 0){
 			x2 = minus(0, x2);
 			for(int i=0; i<x2; i++){
 			    sum = plus(sum, x1);
 		    }
 			sum = minus(0, sum);
 		}
-		if(x1 < 0 && x2 < 0){
+		else if(x1 < 0 && x2 < 0){
 			x1 = minus(0, x1);
 			x2 = minus(0, x2);
 			for(int i=0; i<x2; i++){
@@ -114,7 +113,7 @@ public class Algebra {
 				sum = times(x2, count);
 			}
 			if(x1 != sum) count--;
-			sum = minus(0, sum);
+			count = minus(0, count);
 		}
 		if (x1 >0 && x2 < 0){
 			x2 = minus(0, x2);
@@ -123,11 +122,16 @@ public class Algebra {
 				sum = times(x2, count);
 			}
 			if(x1 != sum) count--;
-			sum = minus(0, sum);
+			count = minus(0, count);
 		}
 		if (x1<0 && x2<0) {
 			x1 = minus(0, x1);
 			x2 = minus(0, x2);
+			while (x1 > sum) {
+				count++;
+				sum = times(x2, count);
+			}
+			if(x1 != sum) count--;
 		}
 		else{
 		    while (x1 > sum) {
@@ -162,14 +166,14 @@ public class Algebra {
 			y1 = times (g,2);
 			y2 = times (g,g);
 			y3 = minus((int)y2, x);
-			y4 = y3/y1;
+			y4 = (int)div((int)y3, (int)y1);
 			z = minus (g, (int)y4);	
 			g=(int)z;
 			sum = (int)y3;
 			if ((int)y4==0) sum=0;
 			if (sum<0) sum = minus(0, sum);	
 		}
-		return g;
+		return g-1;
 	}	 
 	
 	
