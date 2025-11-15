@@ -33,7 +33,7 @@ public class Algebra {
 	    	}
 	    }
 		else{
-			for(int i=x2; i>0; i++){
+			for(int i=x2; i<0; i++){
 		    	sum--;
 	    	}	
 		}
