@@ -46,21 +46,12 @@ public class LoanCalc {
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
 		// Replace the following statement with your code
 		double g = loan / n;
-        double result = endBalance(loan, rate, n, g);
         iterationCounter = 0;
-        while (result > 0) {
-             g += 1.0; 
-             result = endBalance(loan, rate, n, g);
-             iterationCounter++; 
-        }
-        g -= 1.0; 
-        result = endBalance(loan, rate, n, g);
-        while (result > 0) {
+        while (endBalance(loan, rate, n, g) > 0) {
             g += epsilon;
-            result = endBalance(loan, rate, n, g);
-            iterationCounter++; 
+            iterationCounter++;
         }
-        return g; 
+        return g;
     }
     
     // Uses bisection search to compute an approximation of the periodical payment 
@@ -85,7 +76,7 @@ public class LoanCalc {
             }
             g = (l + h) / 2.0;
         }
-        return g; 
+        return g;
     }
 }
   
