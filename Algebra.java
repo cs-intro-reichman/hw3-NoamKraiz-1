@@ -33,7 +33,7 @@ public class Algebra {
 	    	}
 	    }
 		else{
-			for(int i=x2; i>0; i--){
+			for(int i=x2; i>0; i++){
 		    	sum--;
 	    	}	
 		}
@@ -173,46 +173,7 @@ public class Algebra {
 	}	 
 	
 	
-	// Returns x1 * x2
-	public static double times(double x1, double x2) {
-		// Replace the following statement with your code
-		double sum=0;
-		for(int i=0; i<x2; i++){
-			sum += plus(sum, x1);
-		}
-		return sum;
-	}
-	// Returns x1 + x2
-	public static double plus(double x1, double x2) {
-		// Replace the following statement with your code
-		double sum = x1;
-		for(int i=0; i<x2; i++){
-			sum++;
-		}
-		return sum;
-	}
-	// Returns x1 - x2
-	public static double minus(double x1, double x2) {
-		// Replace the following statement with your code
-		double sum = x1;
-		for(int i=0; i<x2; i++){
-			sum--;
-		}
-		return sum;
-	}
-
-  // Returns the integer part of x1 / x2 
-	public static double div(double x1, double x2) {
-		// Replace the following statement with your code
-		int count = 1;
-		double sum = x2;
-		while (x1 >= sum) {
-			count++;
-			sum = times(x2, count);
-		}
-		if(x1 != sum) count--;
-		return count;
-	}
+	
 }
 
 
