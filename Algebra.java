@@ -67,6 +67,7 @@ public class Algebra {
 			for(int i=0; i<x2; i++){
 			    sum = plus(sum, x1);
 		    }
+			sum = minus(0, sum);
 		}
 		else if (x1 >0 && x2 < 0){
 			x2 = minus(0, x2);
@@ -154,31 +155,29 @@ public class Algebra {
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		// Replace the following statement with your code
-		if (x==1) return 1;
-		double epsilon = 0.01;
-		int g =x;
-		g = div(g,2);
-		double y1,y2,y3,y4,z;
-		int sum = minus(times(g, g),x);
-		if (sum<0) sum = minus(0, sum);
-	
-		while (sum > epsilon) {
-			y1 = times (g,2);
-			y2 = times (g,g);
-			y3 = minus((int)y2, x);
-			y4 = (int)div((int)y3, (int)y1);
-			z = minus (g, (int)y4);	
-			g=(int)z;
-			sum = (int)y3;
-			if ((int)y4==0) sum=0;
-			if (sum<0) sum = minus(0, sum);	
-		}
-		return g-1;
-	}	 
-	
-	
-	
+    if (x <= 1) return x;
+    int low = 1;
+    int high = 46340; 
+    if (x < high) {
+        high = x;
+    }
+    int result = 0;
+    while (minus(low, high) <= 0) { 
+        int diff = minus(high, low); 
+        int diff_half = div(diff, 2); 
+        int mid = plus(low, diff_half); 
+        int mid_squared = times(mid, mid); 
+        if (minus(mid_squared, x) == 0) {
+            return mid;
+        } 
+        if (minus(mid_squared, x) < 0) {
+            result = mid; 
+            low = plus(mid, 1); 
+        } 
+        else {
+            high = minus(mid, 1); 
+        }
+    }
+    return result;
 }
-
-
-
+}
