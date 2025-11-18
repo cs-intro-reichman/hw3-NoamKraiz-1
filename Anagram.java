@@ -32,15 +32,13 @@ public class Anagram {
 		String str3 = preProcess(str1);
 		String str4 = preProcess(str2);
 		int j=0;
-		boolean exist=true;
 		for(int i=0; i<str3.length(); i++){
 			j=0;
 			if(str3.charAt(i) != ' '){
-			while (str3.charAt(i) != str4.charAt(j)&& exist) {
+			while (str3.charAt(i) != str4.charAt(j)) {
 				j++;
-				if (j == str3.length()) exist = false;
+				if (j == str3.length()) return false;
 			}
-			if (!exist) return false;
 		}
 		}
 		return true;
