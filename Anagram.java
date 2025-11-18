@@ -36,9 +36,9 @@ public class Anagram {
 		for(int i=0; i<str3.length(); i++){
 			j=0;
 			if(str3.charAt(i) != ' '){
-			while (str3.charAt(i) != str4.charAt(j)) {
+			while (str3.charAt(i) != str4.charAt(j)&& exist) {
 				j++;
-				if (j == str4.length()) exist = false;
+				if (j == str3.length()-1) exist = false;
 			}
 			if (!exist) return false;
 		}
@@ -51,6 +51,7 @@ public class Anagram {
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		// Replace the following statement with your code
+		if(str.isEmpty()) return str;
 		String ans ="";
 		char ch = str.charAt(0);
 		if (ch >= 'a' && ch <='z')ans = "" + ch;
