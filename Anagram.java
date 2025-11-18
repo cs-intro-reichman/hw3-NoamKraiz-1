@@ -38,7 +38,7 @@ public class Anagram {
 			if(str3.charAt(i) != ' '){
 			while (str3.charAt(i) != str4.charAt(j)&& exist) {
 				j++;
-				if (j == str3.length()-1) exist = false;
+				if (j == str3.length()) exist = false;
 			}
 			if (!exist) return false;
 		}
