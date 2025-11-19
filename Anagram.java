@@ -75,13 +75,12 @@ public class Anagram {
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		// Replace the following statement with your code
-		String str1 = str;
-		int num = str1.length()*(int)Math.random()+1;
-		String str2 = str1.substring(num,str1.length());
-		String str3= str1.substring(0, num);
-		String ans = str2 + str3;
-
-		return ans;
+		for(int i=0; i<str.length(); i++){
+			int num = (int)(Math.random()*str.length());
+			str+=str.charAt(num);
+			str = str.substring(0, num) + str.substring(num +1);
+		}
+		return str;
 	}
 	
 }
